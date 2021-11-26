@@ -9,14 +9,19 @@ import Foundation
 
 public enum Result<Value> {
     case success(Value)
-    case failure(Error)
+    case failure(ErrorEnum)
+}
+
+public enum ErrorEnum  {
+    case notFound(msg: String)
+    case genericError(_ error: Error)
 }
 
 public class APIClient {
 
     // MARK: - Properties
 
-    private let baseURL = URL(string: "http://www.boredapi.com/api/activity/")!
+    private let baseURL = URL(string: "http://www.boredapi.com/api/")!
 
     private let session: URLSession
 
@@ -27,9 +32,27 @@ public class APIClient {
     }
 
     // MARK: - Methods
-    public func getActivity(with activityParameter: ActivityParameter?, completion: @escaping (_ result: Result<ActivityResponse>) -> Void) {
+    public func getActivity(with activityParameter: ActivityParameter, completion: @escaping (_ result: Result<ActivityResponse>) -> Void) {
         
-        let queryString = ""
+        var queryString = "activity/"
+        
+        if let participants = activityParameter.numberOfParticipants {
+            queryString = queryString + "?participants=\(participants)"
+        }
+        if let type = activityParameter.activityType {
+            if queryString == "activity/"{
+                queryString = queryString + "?type=\(type.rawValue)"
+            } else {
+                queryString = queryString + "&type=\(type.rawValue)"
+            }
+        }
+        if let priceRange = activityParameter.priceRange {
+            if queryString == "activity/" {
+                queryString = queryString + "?minprice=\(priceRange.minPrice)&maxprice=\(priceRange.maxPrice)"
+            } else {
+                queryString = queryString + "&minprice=\(priceRange.minPrice)&maxprice=\(priceRange.maxPrice)"
+            }
+        }
 
         guard let requestURL = URL(string: queryString, relativeTo: baseURL) else {
             return
@@ -46,7 +69,12 @@ public class APIClient {
 
                     let activity = try decoder.decode(ActivityResponse.self, from: data)
                     
-                    //let images = paths.map({PlaceItem(url: $0)})
+                    if let error = activity.error {
+                        DispatchQueue.main.async {
+                            completion(.failure(ErrorEnum.notFound(msg: error)))
+                        }
+                        return
+                    }
 
                     DispatchQueue.main.async {
                         completion(.success(activity))
@@ -54,12 +82,12 @@ public class APIClient {
 
                 } catch {
                     DispatchQueue.main.async {
-                        completion(.failure(error))
+                        completion(.failure(ErrorEnum.genericError(error)))
                     }
                 }
             } else if let error = error {
                 DispatchQueue.main.async {
-                    completion(.failure(error))
+                    completion(.failure(ErrorEnum.genericError(error)))
                 }
             }
         }

@@ -44,12 +44,13 @@ class SelectionViewController: UIViewController {
 extension SelectionViewController: SelectionViewDelegate {
     
     func findActivityButtonTapped() {
-        viewModel.findActivity()
+        let participants = uiController.participantsTextField.text
+        let activityType = uiController.activityTypeTextField.text
+        viewModel.findActivity(participants, type: activityType)
     }
     
     func rangeSliderValueChanged(_ rangeSlider: RangeSlider) {
-        let values = "(\(rangeSlider.lowerValue) \(rangeSlider.upperValue))"
-        print("Range slider value changed: \(values)")
+        viewModel.setPriceRange(rangeSlider)
     }
     
 }

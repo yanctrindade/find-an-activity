@@ -8,11 +8,12 @@
 import Foundation
 
 public struct ActivityResponse: Decodable {
-    let activity: String
-    let type: String
-    let participants: Int
-    let price: Float
-    let link: String
-    let key: String
-    let acessibility: Int
+    let activity: String?
+    let type: String?
+    let participants: Int?
+    let price: Double?
+    let link: String?
+    let key: String?
+    let acessibility: Int?
+    let error: String?
 }

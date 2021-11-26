@@ -8,14 +8,14 @@
 import Foundation
 
 public struct ActivityParameter {
-    let priceRange: PriceRange?
-    let numberOfParticipants: Int?
-    let activityType: ActivityTypeEnum?
+    var priceRange: PriceRange?
+    var numberOfParticipants: Int?
+    var activityType: ActivityTypeEnum?
 }
 
 struct PriceRange {
-    let minPrice: Float
-    let maxPrice: Float
+    var minPrice: Float
+    var maxPrice: Float
 }
 
 enum ActivityTypeEnum: String, CaseIterable {
