@@ -12,8 +12,6 @@ class SelectionViewController: UIViewController {
     let uiController: SelectionView
     let viewModel: SelectionViewModel
     
-    let items = ["Yan", "Maria", "Juliana"]
-    
     init(viewModel: SelectionViewModel) {
         self.viewModel = viewModel
         self.uiController = SelectionView()
@@ -36,14 +34,22 @@ class SelectionViewController: UIViewController {
         uiController.activityTypePickerView.delegate = self
         uiController.activityTypeTextField.delegate = self
     }
+    
+    override func viewDidLayoutSubviews() {
+        uiController.setupSliderFrame()
+    }
 
 }
 
 extension SelectionViewController: SelectionViewDelegate {
     
     func findActivityButtonTapped() {
-        print("Find Activity Button Tapped")
-        //coordinator.selectionToResult(activity: ActivityResponse())
+        viewModel.findActivity()
+    }
+    
+    func rangeSliderValueChanged(_ rangeSlider: RangeSlider) {
+        let values = "(\(rangeSlider.lowerValue) \(rangeSlider.upperValue))"
+        print("Range slider value changed: \(values)")
     }
     
 }
@@ -55,19 +61,19 @@ extension SelectionViewController: UITextFieldDelegate {
 extension SelectionViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+        return viewModel.PICKER_COLUMNS_NUMBER
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return items.count
+        return viewModel.items.count
     }
     
     func pickerView( _ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return items[row]
+        return viewModel.items[row]
     }
     
     func pickerView( _ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        uiController.activityTypeTextField.text = items[row]
+        uiController.activityTypeTextField.text = viewModel.items[row]
         uiController.activityTypePickerView.resignFirstResponder()
     }
     
