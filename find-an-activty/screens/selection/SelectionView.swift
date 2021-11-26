@@ -48,7 +48,7 @@ class SelectionView: UIView {
         pickerAccessory.frame = frame
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneBtnClicked(_:)))
-        pickerAccessory.items = [flexSpace, doneButton]
+        pickerAccessory.items = [flexSpace, flexSpace, doneButton]
         textField.inputAccessoryView = pickerAccessory
         
         return textField
@@ -142,8 +142,6 @@ extension SelectionView: RenderViewProtocol {
         
         NSLayoutConstraint.activate([
             priceRangeSlider.heightAnchor.constraint(equalToConstant: 30),
-            priceRangeSlider.widthAnchor.constraint(equalToConstant: verticalStackView.bounds.width),
-            priceRangeSlider.topAnchor.constraint(equalTo: activityTypeTextField.bottomAnchor, constant: 32)
         ])
     }
     

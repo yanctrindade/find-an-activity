@@ -13,16 +13,31 @@ class SelectionViewModel {
     let PICKER_COLUMNS_NUMBER = 1
     let items: [String] = ActivityTypeEnum.allCases.map { $0.rawValue }
     
-    func findActivity() {
+    var parameteres = ActivityParameter()
+    
+    func findActivity(_ participants: String?, type: String?) {
         print("Find Activity Button Tapped")
-        apiClient.getActivity(with: nil) { result in
+        
+        if let participants = participants, let type = type {
+            parameteres.numberOfParticipants = Int(participants)
+            parameteres.activityType = ActivityTypeEnum(rawValue: type)
+        }
+        
+        apiClient.getActivity(with: parameteres) { result in
             switch result {
                 case .success(let activity):
-                    break
+                    print(activity)
                 case .failure(let error):
-                    break
+                    print(error)
             }
         }
+    }
+    
+    func setPriceRange(_ rangeSlider: RangeSlider) {
+        let values = "(\(rangeSlider.lowerValue) \(rangeSlider.upperValue))"
+        print("Range slider value changed: \(values)")
+        let priceRange = PriceRange(minPrice: Float(rangeSlider.lowerValue), maxPrice: Float(rangeSlider.upperValue))
+        parameteres.priceRange = priceRange
     }
     
 }
