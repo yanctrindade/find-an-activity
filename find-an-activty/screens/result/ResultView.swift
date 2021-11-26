@@ -31,7 +31,7 @@ extension ResultView: RenderViewProtocol {
     }
     
     func additionalViewSetup() {
-         
+        backgroundColor = .white
     }
     
 }

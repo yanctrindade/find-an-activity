@@ -33,6 +33,10 @@ class SelectionViewController: UIViewController {
         uiController.activityTypePickerView.dataSource = self
         uiController.activityTypePickerView.delegate = self
         uiController.activityTypeTextField.delegate = self
+        
+        viewModel.activityFound = { [weak self] activity in
+            self?.coordinator.selectionToResult(activity: activity)
+        }
     }
     
     override func viewDidLayoutSubviews() {
