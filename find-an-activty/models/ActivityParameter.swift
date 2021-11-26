@@ -10,7 +10,7 @@ import Foundation
 public struct ActivityParameter {
     let priceRange: PriceRange?
     let numberOfParticipants: Int?
-    let activityType: ActivityType?
+    let activityType: ActivityTypeEnum?
 }
 
 struct PriceRange {
@@ -18,7 +18,7 @@ struct PriceRange {
     let maxPrice: Float
 }
 
-enum ActivityType: String {
+enum ActivityTypeEnum: String, CaseIterable {
     case education = "education"
     case recreational = "recreational"
     case social = "social"

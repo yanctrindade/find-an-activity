@@ -9,6 +9,7 @@ import UIKit
 
 protocol SelectionViewDelegate: AnyObject {
     func findActivityButtonTapped()
+    func rangeSliderValueChanged(_ rangeSlider: RangeSlider)
 }
 
 class SelectionView: UIView {
@@ -38,25 +39,27 @@ class SelectionView: UIView {
         textField.placeholder = "Select Activity Type"
         textField.borderStyle = .roundedRect
         textField.inputView = activityTypePickerView
+        textField.tintColor = .clear
         
         var pickerAccessory = UIToolbar()
         pickerAccessory.autoresizingMask = .flexibleHeight
         var frame = pickerAccessory.frame
         frame.size.height = 44.0
         pickerAccessory.frame = frame
-        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelBtnClicked(_:)))
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneBtnClicked(_:)))
-        pickerAccessory.items = [cancelButton, flexSpace, doneButton]
+        pickerAccessory.items = [flexSpace, doneButton]
         textField.inputAccessoryView = pickerAccessory
         
         return textField
     }()
     
-    var priceRangeSlider: UISlider = {
-        let priceRangerSlider = UISlider()
-        priceRangerSlider.translatesAutoresizingMaskIntoConstraints = false
-        return priceRangerSlider
+    lazy var priceRangeSlider: RangeSlider = {
+        let slider = RangeSlider()
+        slider.translatesAutoresizingMaskIntoConstraints = false
+        slider.addTarget(self, action: #selector(rangeSliderValueChanged(_:)),
+                              for: .valueChanged)
+        return slider
     }()
     
     var findButton: UIButton = {
@@ -93,6 +96,10 @@ class SelectionView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @objc func rangeSliderValueChanged(_ rangeSlider: RangeSlider) {
+        delegate?.rangeSliderValueChanged(rangeSlider)
+    }
+    
     @objc func cancelBtnClicked(_ button: UIBarButtonItem?) {
         activityTypeTextField.resignFirstResponder()
     }
@@ -105,6 +112,13 @@ class SelectionView: UIView {
         delegate?.findActivityButtonTapped()
     }
                          
+    func setupSliderFrame() {
+        let width = verticalStackView.bounds.width
+        let height: CGFloat = 30
+        
+        priceRangeSlider.frame = CGRect(x: 0, y: activityTypeTextField.frame.maxY+24,
+                                        width: width, height: height)
+    }
 }
 
 extension SelectionView: RenderViewProtocol {
@@ -124,6 +138,12 @@ extension SelectionView: RenderViewProtocol {
             verticalStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             verticalStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32),
             verticalStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32)
+        ])
+        
+        NSLayoutConstraint.activate([
+            priceRangeSlider.heightAnchor.constraint(equalToConstant: 30),
+            priceRangeSlider.widthAnchor.constraint(equalToConstant: verticalStackView.bounds.width),
+            priceRangeSlider.topAnchor.constraint(equalTo: activityTypeTextField.bottomAnchor, constant: 32)
         ])
     }
     

@@ -25,6 +25,8 @@
 		8FABFA7727508A0400480C32 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FABFA7627508A0400480C32 /* ResultView.swift */; };
 		8FABFA7927508A0C00480C32 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FABFA7827508A0C00480C32 /* ResultViewController.swift */; };
 		8FABFA7B27508A1700480C32 /* ResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FABFA7A27508A1700480C32 /* ResultViewModel.swift */; };
+		8FABFB072751732400480C32 /* RangeSliderTrackLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FABFB052751732400480C32 /* RangeSliderTrackLayer.swift */; };
+		8FABFB082751732400480C32 /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FABFB062751732400480C32 /* RangeSlider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,8 @@
 		8FABFA7627508A0400480C32 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		8FABFA7827508A0C00480C32 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		8FABFA7A27508A1700480C32 /* ResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewModel.swift; sourceTree = "<group>"; };
+		8FABFB052751732400480C32 /* RangeSliderTrackLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSliderTrackLayer.swift; sourceTree = "<group>"; };
+		8FABFB062751732400480C32 /* RangeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,7 @@
 				8FABFA692750845900480C32 /* AppCoordinator.swift */,
 				8FABFA6E2750852200480C32 /* protocols */,
 				8FABFA6B275084BE00480C32 /* extensions */,
+				8FABFB04275172F100480C32 /* components */,
 				8FABFA712750856900480C32 /* models */,
 				8FABFA5C2750824F00480C32 /* network */,
 				8FABFA5E2750825E00480C32 /* screens */,
@@ -159,8 +164,8 @@
 		8FABFA5E2750825E00480C32 /* screens */ = {
 			isa = PBXGroup;
 			children = (
-				8FABFA682750844900480C32 /* result */,
 				8FABFA672750844100480C32 /* selection */,
+				8FABFA682750844900480C32 /* result */,
 			);
 			path = screens;
 			sourceTree = "<group>";
@@ -208,6 +213,23 @@
 				8FABFA722750864300480C32 /* ActivityParameter.swift */,
 			);
 			path = models;
+			sourceTree = "<group>";
+		};
+		8FABFB04275172F100480C32 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				8FABFB0927517ACE00480C32 /* rangeSlider */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
+		8FABFB0927517ACE00480C32 /* rangeSlider */ = {
+			isa = PBXGroup;
+			children = (
+				8FABFB062751732400480C32 /* RangeSlider.swift */,
+				8FABFB052751732400480C32 /* RangeSliderTrackLayer.swift */,
+			);
+			path = rangeSlider;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -341,7 +363,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FABFA752750866000480C32 /* ActivityResponse.swift in Sources */,
+				8FABFB082751732400480C32 /* RangeSlider.swift in Sources */,
 				8FABFA702750854900480C32 /* RenderViewProtocol.swift in Sources */,
+				8FABFB072751732400480C32 /* RangeSliderTrackLayer.swift in Sources */,
 				8FABFA7727508A0400480C32 /* ResultView.swift in Sources */,
 				8FABFA732750864300480C32 /* ActivityParameter.swift in Sources */,
 				8FABFA602750828400480C32 /* SelectionViewController.swift in Sources */,
