@@ -15,9 +15,9 @@ class SelectionViewModel {
     
     var parameteres = ActivityParameter()
     
+    var activityFound: ((ActivityResponse) -> ())?
+    
     func findActivity(_ participants: String?, type: String?) {
-        print("Find Activity Button Tapped")
-        
         if let participants = participants, let type = type {
             parameteres.numberOfParticipants = Int(participants)
             parameteres.activityType = ActivityTypeEnum(rawValue: type)
@@ -26,7 +26,7 @@ class SelectionViewModel {
         apiClient.getActivity(with: parameteres) { result in
             switch result {
                 case .success(let activity):
-                    print(activity)
+                    self.activityFound?(activity)
                 case .failure(let error):
                     print(error)
             }
