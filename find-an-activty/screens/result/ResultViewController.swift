@@ -28,6 +28,19 @@ class ResultViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.getImageURL()
+        setupUI()
+        
+        viewModel.imageURLRetrieved = { images in
+            guard let firstImageURL = images.first?.url,
+                  let imageURL = URL(string: firstImageURL) else {
+                return
+            }
+            self.uiController.randomImageView.setImage(from: imageURL)
+        }
     }
 
+    func setupUI() {
+        uiController.activityInfoLabel.text = viewModel.getActivityInfo()
+    }
 }
