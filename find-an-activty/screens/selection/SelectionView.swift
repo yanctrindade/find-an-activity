@@ -60,7 +60,7 @@ class SelectionView: UIView {
         label.text = "Price Range:"
         return label
     }()
-    
+
     lazy var priceRangeSlider: RangeSlider = {
         let slider = RangeSlider()
         slider.translatesAutoresizingMaskIntoConstraints = false
