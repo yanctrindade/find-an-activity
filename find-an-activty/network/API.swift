@@ -22,6 +22,8 @@ public class APIClient {
     // MARK: - Properties
 
     private let baseURL = URL(string: "http://www.boredapi.com/api/")!
+    
+    private let imageBaseURL = URL(string: "https://api.thecatapi.com/v1/images/search")!
 
     private let session: URLSession
 
@@ -95,4 +97,35 @@ public class APIClient {
         task.resume()
     }
 
+    public func getImage(_ completion: @escaping (_ result: Result<[ImageResponse]>) -> Void) {
+        
+        let request = URLRequest(url: imageBaseURL)
+
+        let task = session.dataTask(with: request) { data, response, error in
+            
+            if let data = data {
+                do {
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+                    let images = try decoder.decode([ImageResponse].self, from: data)
+
+                    DispatchQueue.main.async {
+                        completion(.success(images))
+                    }
+
+                } catch {
+                    DispatchQueue.main.async {
+                        completion(.failure(ErrorEnum.genericError(error)))
+                    }
+                }
+            } else if let error = error {
+                DispatchQueue.main.async {
+                    completion(.failure(ErrorEnum.genericError(error)))
+                }
+            }
+        }
+
+        task.resume()
+    }
 }

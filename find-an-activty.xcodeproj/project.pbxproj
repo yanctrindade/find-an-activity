@@ -27,6 +27,8 @@
 		8FABFA7B27508A1700480C32 /* ResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FABFA7A27508A1700480C32 /* ResultViewModel.swift */; };
 		8FABFB072751732400480C32 /* RangeSliderTrackLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FABFB052751732400480C32 /* RangeSliderTrackLayer.swift */; };
 		8FABFB082751732400480C32 /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FABFB062751732400480C32 /* RangeSlider.swift */; };
+		8FABFB0B2751A40400480C32 /* ImageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FABFB0A2751A40400480C32 /* ImageResponse.swift */; };
+		8FABFB0D2751A55400480C32 /* UIImageView+ImageLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FABFB0C2751A55400480C32 /* UIImageView+ImageLoading.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 		8FABFA7A27508A1700480C32 /* ResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewModel.swift; sourceTree = "<group>"; };
 		8FABFB052751732400480C32 /* RangeSliderTrackLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSliderTrackLayer.swift; sourceTree = "<group>"; };
 		8FABFB062751732400480C32 /* RangeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
+		8FABFB0A2751A40400480C32 /* ImageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResponse.swift; sourceTree = "<group>"; };
+		8FABFB0C2751A55400480C32 /* UIImageView+ImageLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+ImageLoading.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				8FABFA6C2750851C00480C32 /* UIViewController+Extesions.swift */,
+				8FABFB0C2751A55400480C32 /* UIImageView+ImageLoading.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -211,6 +216,7 @@
 			children = (
 				8FABFA742750866000480C32 /* ActivityResponse.swift */,
 				8FABFA722750864300480C32 /* ActivityParameter.swift */,
+				8FABFB0A2751A40400480C32 /* ImageResponse.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -362,10 +368,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FABFB0B2751A40400480C32 /* ImageResponse.swift in Sources */,
 				8FABFA752750866000480C32 /* ActivityResponse.swift in Sources */,
 				8FABFB082751732400480C32 /* RangeSlider.swift in Sources */,
 				8FABFA702750854900480C32 /* RenderViewProtocol.swift in Sources */,
 				8FABFB072751732400480C32 /* RangeSliderTrackLayer.swift in Sources */,
+				8FABFB0D2751A55400480C32 /* UIImageView+ImageLoading.swift in Sources */,
 				8FABFA7727508A0400480C32 /* ResultView.swift in Sources */,
 				8FABFA732750864300480C32 /* ActivityParameter.swift in Sources */,
 				8FABFA602750828400480C32 /* SelectionViewController.swift in Sources */,

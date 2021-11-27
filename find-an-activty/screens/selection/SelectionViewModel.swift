@@ -23,10 +23,10 @@ class SelectionViewModel {
             parameteres.activityType = ActivityTypeEnum(rawValue: type)
         }
         
-        apiClient.getActivity(with: parameteres) { result in
+        apiClient.getActivity(with: parameteres) { [weak self] result in
             switch result {
                 case .success(let activity):
-                    self.activityFound?(activity)
+                    self?.activityFound?(activity)
                 case .failure(let error):
                     print(error)
             }
@@ -34,8 +34,6 @@ class SelectionViewModel {
     }
     
     func setPriceRange(_ rangeSlider: RangeSlider) {
-        let values = "(\(rangeSlider.lowerValue) \(rangeSlider.upperValue))"
-        print("Range slider value changed: \(values)")
         let priceRange = PriceRange(minPrice: Float(rangeSlider.lowerValue), maxPrice: Float(rangeSlider.upperValue))
         parameteres.priceRange = priceRange
     }
