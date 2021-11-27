@@ -54,6 +54,13 @@ class SelectionView: UIView {
         return textField
     }()
     
+    var princeRangeLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Price Range:"
+        return label
+    }()
+    
     lazy var priceRangeSlider: RangeSlider = {
         let slider = RangeSlider()
         slider.translatesAutoresizingMaskIntoConstraints = false
@@ -116,7 +123,7 @@ class SelectionView: UIView {
         let width = verticalStackView.bounds.width
         let height: CGFloat = 30
         
-        priceRangeSlider.frame = CGRect(x: 0, y: activityTypeTextField.frame.maxY+24,
+        priceRangeSlider.frame = CGRect(x: 0, y: princeRangeLabel.frame.maxY+24,
                                         width: width, height: height)
     }
 }
@@ -128,6 +135,7 @@ extension SelectionView: RenderViewProtocol {
         verticalStackView.addArrangedSubview(descriptionLabel)
         verticalStackView.addArrangedSubview(participantsTextField)
         verticalStackView.addArrangedSubview(activityTypeTextField)
+        verticalStackView.addArrangedSubview(princeRangeLabel)
         verticalStackView.addArrangedSubview(priceRangeSlider)
         verticalStackView.addArrangedSubview(findButton)
     }
